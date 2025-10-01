@@ -32,7 +32,7 @@
 ### Clone the repository
 
 ```sh
-git clone https://github.com/nqminds/SBOM-GAP.git
+git clone https://github.com/nqminds/UniBOM.git
 ```
 
 ---
