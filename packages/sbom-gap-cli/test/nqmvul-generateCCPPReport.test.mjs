@@ -5,7 +5,7 @@ import path from 'path';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -generateCCPPReport command', () => {
+describe('unibom -generateCCPPReport command', () => {
   const projectRoot = process.cwd();
   const nodeModulesPath = path.join(projectRoot, 'test/test-files/main.cpp');
   const outputFilePath = path.join(
@@ -27,7 +27,7 @@ describe('nqmvul -generateCCPPReport command', () => {
 
   test('generates SBOM file and saves it to the specified path', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync(`nqmvul -generateCCPPReport ${nodeModulesPath} test_ccs`);
+    const { stdout, stderr } = await execAsync(`unibom -generateCCPPReport ${nodeModulesPath} test_ccs`);
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain('dependency scanning completed');

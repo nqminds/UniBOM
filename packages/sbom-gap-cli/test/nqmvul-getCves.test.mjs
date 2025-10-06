@@ -3,10 +3,10 @@ import { promisify } from 'util';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -getCves command', () => {
+describe('unibom -getCves command', () => {
   test('retrieve CVEs for cpe', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync('nqmvul -getCves cpe:2.3:a:thekelleys:dnsmasq:0.4:*:*:*:*:*:*:*');
+    const { stdout, stderr } = await execAsync('unibom -getCves cpe:2.3:a:thekelleys:dnsmasq:0.4:*:*:*:*:*:*:*');
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain('CVE');

@@ -5,7 +5,7 @@ import path from 'path';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -generateSbom command', () => {
+describe('unibom -generateSbom command', () => {
   const projectRoot = process.cwd();
   const testProjectPath = path.join(
     projectRoot,
@@ -32,7 +32,7 @@ describe('nqmvul -generateSbom command', () => {
 
   test('generates SBOM file and saves it to the specified path', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync(`nqmvul -generateSbom ${testProjectPath} test_sbom`);
+    const { stdout, stderr } = await execAsync(`unibom -generateSbom ${testProjectPath} test_sbom`);
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain('SBOM generation completed');

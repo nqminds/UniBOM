@@ -1,11 +1,18 @@
-import express from "express";
-import multer from "multer";
-import config from "./config.json" assert { type: "json" };
-import fs from "fs";
-import { fetchCVEsWithRateLimit } from "../src/list-vulnerabilities.mjs";
-import { calculateAverageBaseScore } from "../src/utils.mjs";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+/* eslint-disable prefer-const */
+/* eslint-disable no-path-concat */
+/* eslint-disable prefer-template */
+/* eslint-disable object-shorthand */
+/* eslint-disable import/order */
+/* eslint-disable import/no-relative-packages */
+
+import express from 'express';
+import multer from 'multer';
+import fs from 'fs';
+import config from './config.json' with { type: 'json' };
+import { fetchCVEsWithRateLimit } from '../src/list-vulnerabilities.mjs';
+import { calculateAverageBaseScore } from '../src/utils.mjs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -15,7 +22,7 @@ const { port } = config;
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, __dirname + "/uploads");
+    callback(null, __dirname + '/uploads');
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
@@ -24,10 +31,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.post("/sbomRiskAverage", upload.single("file"), async (req, res) => {
+app.post('/sbomRiskAverage', upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
-      throw new Error("No file uploaded.");
+      throw new Error('No file uploaded.');
     }
 
     const filePath = req.file.path;
@@ -36,7 +43,7 @@ app.post("/sbomRiskAverage", upload.single("file"), async (req, res) => {
 
     // delete the file after processing
     fs.unlinkSync(filePath, (err) => {
-      if (err) console.error("Error deleting file:", err);
+      if (err) console.error('Error deleting file:', err);
     });
 
     res.json(averageBaseScore);

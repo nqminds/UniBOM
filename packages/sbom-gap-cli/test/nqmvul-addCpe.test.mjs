@@ -48,7 +48,7 @@ const existingSbomData = {
   version: 1,
 };
 
-describe('nqmvul -addCpeToSbom command', () => {
+describe('unibom -addCpeToSbom command', () => {
     beforeEach(async () => {
       await fs.writeFile(testFilePath, JSON.stringify(existingSbomData, null, 2), 'utf8');
     });

@@ -6,10 +6,10 @@ Below are answers to some commonly asked questions and solutions to potential is
 
 ## Bad Request Error and Historical CPEs Fetching Error
 
-If you encounter a "bad request" error or "Error: Error fetching historical CPEs" while using the `nqmvul -getHistory` or `nqmvul -getHistoricalCpes` commands, please ensure the following:
+If you encounter a "bad request" error or "Error: Error fetching historical CPEs" while using the `unibom -getHistory` or `unibom -getHistoricalCpes` commands, please ensure the following:
 
 * The .env file containing your NIST API key is correctly placed in the SBOM-GAP directory.
-* When using `nqmvul -getHistoricalCpes`, omit the surrounding quotation marks, i.e., use `nqmvul -getHistoricalCpes cpe:2.3:\a:\busybox:busybox:1.33.2`.
+* When using `unibom -getHistoricalCpes`, omit the surrounding quotation marks, i.e., use `unibom -getHistoricalCpes cpe:2.3:\a:\busybox:busybox:1.33.2`.
 
 
 

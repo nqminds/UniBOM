@@ -60,7 +60,7 @@ function createCycloneDxSBOMJson(cpeMapping) {
       tools: [
         {
           vendor: 'nquiringminds',
-          name: 'nqmvul',
+          name: 'unibom',
           version: '1',
         },
       ],

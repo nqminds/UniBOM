@@ -4,7 +4,7 @@ import path from 'path';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -listVulnerabilities command', () => {
+describe('unibom -listVulnerabilities command', () => {
   const projectRoot = process.cwd();
   const reportPath = path.join(
     projectRoot,
@@ -13,7 +13,7 @@ describe('nqmvul -listVulnerabilities command', () => {
 
   test('Lists vulnerabilities from grype report', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync(`nqmvul -listVulnerabilities ${reportPath}`);
+    const { stdout, stderr } = await execAsync(`unibom -listVulnerabilities ${reportPath}`);
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain('Creating vulnerability report');

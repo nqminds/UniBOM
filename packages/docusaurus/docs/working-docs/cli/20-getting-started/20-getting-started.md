@@ -66,7 +66,7 @@ vboxuser@testbinwaLlk:~$ docker ps -a
 
 CONTAINER ID    IMAGE                         COMMAND                    CREATED             STATUS           PORTS  NAMES
 
-5a2541bb6992    sbom-gap-nqmvul                "python ./ccscanner/.."    2 days ago          Exited (2)       2 days ago  sbom-gap-nqmvul-1
+5a2541bb6992    sbom-gap-unibom                "python ./ccscanner/.."    2 days ago          Exited (2)       2 days ago  sbom-gap-unibom-1
 
 717bb93ecc87    ionutngm/depscanner:latest    "python ./ccscanner/.."    2 days ago          Exited (1)       2 days ago  sbom-gap-ccscanner-1
 
@@ -91,8 +91,8 @@ sudo docker-compose up -d
 ```
 
 
-### Create a Global Symlink to nqmvul Tool:
-Make the nqmvul tool globally accessible by creating a symlink.
+### Create a Global Symlink to unibom Tool:
+Make the unibom tool globally accessible by creating a symlink.
 
 ```sh
 npm link

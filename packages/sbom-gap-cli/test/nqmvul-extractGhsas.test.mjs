@@ -4,7 +4,7 @@ import path from 'path';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -extractGhsas command', () => {
+describe('unibom -extractGhsas command', () => {
   const projectRoot = process.cwd();
   const reportPath = path.join(
     projectRoot,
@@ -13,7 +13,7 @@ describe('nqmvul -extractGhsas command', () => {
 
   test('Lists Ghsas vulnerabilities', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync(`nqmvul -extractGhsas ${reportPath}`);
+    const { stdout, stderr } = await execAsync(`unibom -extractGhsas ${reportPath}`);
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain('GHSA-93q8-gq69-wqmw');

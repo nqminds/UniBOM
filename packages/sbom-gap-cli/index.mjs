@@ -38,12 +38,12 @@ async function main() {
     console.log(`
 
     Usage:
-    nqmvul [argument] [filePath]
-    nqmvul [argument] [text]
-    nqmvul [argument] [filePath] [text]
-    nqmvul [argument] [filePath] [filePath] [text] [filePath]
-    nqmvul [argument] [text] [text]
-    nqmvul [argument] [text] [argument]
+    unibom [argument] [filePath]
+    unibom [argument] [text]
+    unibom [argument] [filePath] [text]
+    unibom [argument] [filePath] [filePath] [text] [filePath]
+    unibom [argument] [text] [text]
+    unibom [argument] [text] [argument]
 
     Arguments:
     -getCpes                Path to SBOM.json file
@@ -67,7 +67,7 @@ async function main() {
     -generateDockerSbom     Image name and a project name, e.g. nginx:latest nginx
     -addCpe                 Path to SBOM.json file and CPE 2.3 format, e.g. path/to/sbom.json "cpe:2.3:a:postgresql:postgresql:9.6.2:*:*:*:*:*:*:*"
     -binwalk                Current path(use "$(pwd)" for Linux) -binwalk_command file.bin
-    -compare                Paths to sboms e.g. nqmvul -compare <absolute/path/to/sbom1> <absolute/path/to/sbom2>
+    -compare                Paths to sboms e.g. unibom -compare <absolute/path/to/sbom1> <absolute/path/to/sbom2>
     `);
   }
 
@@ -505,10 +505,10 @@ async function main() {
         } else {
           console.log(`
             Make sure you enter the command as:
-            nqmvul -binwalk /path/to/current/directory "[-binwalk_command]" file.bin
+            unibom -binwalk /path/to/current/directory "[-binwalk_command]" file.bin
 
             For Linux systems, you can use:
-            nqmvul -binwalk "$(pwd)" "[-binwalk_command]" file.bin
+            unibom -binwalk "$(pwd)" "[-binwalk_command]" file.bin
             `);
         }
         break;
@@ -540,10 +540,10 @@ async function main() {
           Invalid command usage. Please follow these examples:
           
           With custom filename:
-          nqmvul -compare "[</absolute/path/to/sbom1> </absolute/path/to/sbom2> <additional SBOM paths...>]" custom-filename
+          unibom -compare "[</absolute/path/to/sbom1> </absolute/path/to/sbom2> <additional SBOM paths...>]" custom-filename
           
           Without custom filename (uses default 'comparison-result.txt'):
-          nqmvul -compare </absolute/path/to/sbom1> </absolute/path/to/sbom2> <additional SBOM paths...>
+          unibom -compare </absolute/path/to/sbom1> </absolute/path/to/sbom2> <additional SBOM paths...>
           `);
         } else {
           const comparisonResult = await compareSBOMs(sbomPaths);

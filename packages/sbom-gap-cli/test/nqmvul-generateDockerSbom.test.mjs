@@ -6,7 +6,7 @@ import { expect } from '@jest/globals';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -generateSbom command', () => {
+describe('unibom -generateSbom command', () => {
   const projectRoot = process.cwd();
   const outputFilePath = path.join(
     projectRoot,
@@ -45,7 +45,7 @@ describe('nqmvul -generateSbom command', () => {
 
   test('generates SBOM file and saves it to the specified path', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync('nqmvul -generateDockerSbom ionutnqm/depscanner:latest ccscaner');
+    const { stdout, stderr } = await execAsync('unibom -generateDockerSbom ionutnqm/depscanner:latest ccscaner');
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain(
