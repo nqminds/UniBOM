@@ -21,7 +21,8 @@ The NIST Data API provides endpoints to retrieve information about CVEs (Common 
 >   - `listCpeDetails`  
 >   - `getCves`  
 >   - `getCveInfo`  
->   - `getHistory`  
+>   - `getHistory`
+>   - `compare`    
 >  
 > A future update will migrate this pipeline to use the new **NVD JSON 2.0 data format**.
 

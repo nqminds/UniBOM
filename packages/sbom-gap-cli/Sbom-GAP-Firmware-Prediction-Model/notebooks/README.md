@@ -21,7 +21,8 @@ This Python script automates the process of downloading, extracting, and populat
 >   - `listCpeDetails`  
 >   - `getCves`  
 >   - `getCveInfo`  
->   - `getHistory`  
+>   - `getHistory`
+>   - `compare`  
 >  
 > A future update will migrate this pipeline to use the new **NVD JSON 2.0 data format**.
 
