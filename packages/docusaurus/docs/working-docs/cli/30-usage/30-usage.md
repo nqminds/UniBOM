@@ -7,16 +7,16 @@ title: CLI Tool Usage
 Available commands:
 
 ```sh
-nqmvul -help
+unibom -help
 
 
     Usage:
-    nqmvul [argument] [filePath]
-    nqmvul [argument] [text]
-    nqmvul [argument] [filePath] [text]
-    nqmvul [argument] [filePath] [filePath] [text] [filePath]
-    nqmvul [argument] [text] [text]
-    nqmvul [argument] [text] [argument]
+    unibom [argument] [filePath]
+    unibom [argument] [text]
+    unibom [argument] [filePath] [text]
+    unibom [argument] [filePath] [filePath] [text] [filePath]
+    unibom [argument] [text] [text]
+    unibom [argument] [text] [argument]
 
     Arguments:
     -getCpes                Path to SBOM.json file
@@ -40,7 +40,7 @@ nqmvul -help
 ```
 
 ### generateSbom
-To generate a Software Bill Of Materials (SBOM) for the ecosystems bellow use the command `nqmvul -generateSbom <project_path> <project_name>` (Uses [syft](https://github.com/anchore/syft) and [grype](https://github.com/anchore/grype)):
+To generate a Software Bill Of Materials (SBOM) for the ecosystems bellow use the command `unibom -generateSbom <project_path> <project_name>` (Uses [syft](https://github.com/anchore/syft) and [grype](https://github.com/anchore/grype)):
 
 Alpine (apk)
 C (conan)
@@ -67,7 +67,7 @@ Rust (cargo.lock)
 Swift (cocoapods, swift-package-manager)
 
 ```sh 
-nqmvul -generateSbom Repositories/cyber cyber_sbom
+unibom -generateSbom Repositories/cyber cyber_sbom
 Running syft to generate SBOM...
 SBOM generation completed. SBOM saved to /vulnerability-reports/sboms/cyber_sbom.json
 Running grype to generate vulnerability report...
@@ -134,11 +134,11 @@ Gitsubmodule
 Pkg-config
 
 ```sh
-nqmvul -generateCCPPReport <path_to_c/cpp_project> <project_name>
+unibom -generateCCPPReport <path_to_c/cpp_project> <project_name>
 ```
 
 ```sh
-nqmvul  -generateCCPPReport absolute/path/to/qtbase qtbase_report
+unibom  -generateCCPPReport absolute/path/to/qtbase qtbase_report
 Starting full report generation for project /qtbase...
 Trying to generate dependency list for qtbase_report
 dependency scanning completed.
@@ -261,7 +261,7 @@ The `-getCpes` flag will parse an SBOM and return a list of CPEs in the `2.3` fo
 
 
 ```sh
-nqmvul -getCpes /sbom-cli/vulnerability-reports/sboms/cyber_sbom.json
+unibom -getCpes /sbom-cli/vulnerability-reports/sboms/cyber_sbom.json
 [
   'cpe:2.3:a:@aashutoshrathi/word-wrap:@aashutoshrathi/word-wrap:1.2.6:*:*:*:*:*:*:*',
   'cpe:2.3:a:@ampproject/remapping:@ampproject/remapping:2.2.1:*:*:*:*:*:*:*',
@@ -278,7 +278,7 @@ nqmvul -getCpes /sbom-cli/vulnerability-reports/sboms/cyber_sbom.json
 To save the cpe to a file use:
 
 ```sh
-nqmvul -getCpes <absolute_path_to_sbom.json> <filename>
+unibom -getCpes <absolute_path_to_sbom.json> <filename>
 ```
 
 ### listCpeDetails
@@ -286,7 +286,7 @@ nqmvul -getCpes <absolute_path_to_sbom.json> <filename>
 The `-listCpeDetails` flag will parse an SBOM and return detailed information about each CPE, such as CVEs and CWEs
 
 ```sh
-nqmvul -listCpeDetails /sbom-cli/vulnerability-reports/sbom.json 
+unibom -listCpeDetails /sbom-cli/vulnerability-reports/sbom.json 
 Fetching cpe info from API ... 
 {
   'cpe:2.3:a:busybox:busybox:1.33.2': [
@@ -315,7 +315,7 @@ Fetching cpe info from API ...
 If the `-getCves` flag is set, all CVEs that are available for a CPE will be retrieved along with any related CWEs.
 
 ```sh
-nqmvul -getCves cpe:2.3:a:busybox:busybox:1.33.2 
+unibom -getCves cpe:2.3:a:busybox:busybox:1.33.2 
 Fetching CVEs from API for:  cpe:2.3:a:busybox:busybox:1.33.2
 [
   {
@@ -348,7 +348,7 @@ Fetching CVEs from API for:  cpe:2.3:a:busybox:busybox:1.33.2
 The `-writeCVEs` flag will write all the CVE data of an sbom into a json format to `output_directory/cveData.json`
 
 ```sh
-nqmvul -writeCves /vulnerability-reports/sbom.json /Desktop 
+unibom -writeCves /vulnerability-reports/sbom.json /Desktop 
 Writing CVE data to cveData.json
 Writing file completed
 
@@ -392,7 +392,7 @@ The `-getHistoricalCpes` flag will return all known versions of the input CPE. T
 
 
 ```sh
-nqmvul -getHistoricalCpes cpe:2.3:\a:\busybox:busybox:1.33.2 
+unibom -getHistoricalCpes cpe:2.3:\a:\busybox:busybox:1.33.2 
 Fetching historical CPEs from API
 [
   {
@@ -436,7 +436,7 @@ Fetching historical CPEs from API
 The `--getCveInfo` flag will return all known versions of the input CVE. Supported CVE format: `CVE-2022-48174`
 
 ```sh
- nqmvul -getCveInfo CVE-2022-48174
+ unibom -getCveInfo CVE-2022-48174
 Fetching CVE Info from API
 [
   {
@@ -457,7 +457,7 @@ Fetching CVE Info from API
 The`-getCweInfo` flag will return information such as description for each CWE. Can take one or more CWEs. If multiple CWEs are passed, they must be writen without any space e.g. `CWE-476,CWE-681`
 
 ```sh
- nqmvul -getCweInfo CWE-476,CWE-681
+ unibom -getCweInfo CWE-476,CWE-681
 [
   {
     'CWE-ID': '476',
@@ -488,7 +488,7 @@ The`-getCweInfo` flag will return information such as description for each CWE. 
 The `-listVunlerabilities` flag will list all vulnerabilities previously detected by grype
 
 ```sh
-nqmvul -listVulnerabilities /sbom-cli/vulnerability-reports/reports/vulnerability_report_cyber_test
+unibom -listVulnerabilities /sbom-cli/vulnerability-reports/reports/vulnerability_report_cyber_test
 Creating vulnerability report
 [
   {
@@ -526,7 +526,7 @@ The project_name is utilised to save the extracted dependency list as `/vulnerab
 
 
 ```sh
-nqmvul -genDependencies /Repositories/Dependency_scanner_tools/vim vim                                                    
+unibom -genDependencies /Repositories/Dependency_scanner_tools/vim vim                                                    
 Trying to generate dependency list for vim
 dependency scanning completed.
 dependency list saved to /sbom-cli/vulnerability-reports/ccsDependencies/vim_dependencies
@@ -542,7 +542,7 @@ For the selected project, a conanfile.txt will be created using the `-generateC
 
 
 ```sh
-nqmvul -generateConan vim
+unibom -generateConan vim
 Writing conan file for ../vulnerability-reports/ccsDependencies/vim_dependencies to ../vulnerability-reports/conan-files/vim
 Writing completed
 
@@ -578,7 +578,7 @@ autoconf
 A list of known CPEs for each dependency in /`vulnerability-reports/ccsDependencies/project_name_dependencies` will be generated by the `-mapCpes` option, and it will be saved in `vulnerability-reports/cpes/cpeMapping.json`.
 
 ```sh
-nqmvul -mapCpes vim
+unibom -mapCpes vim
 Trying to map CPEs, this may take a while...
 Mapping completed. Please see the generated file in vulnerability-reports/cpes/cpeMapping.json
 ➜  ~ cat /sbom-cli/vulnerability-reports/cpes/vim/cpeMapping.json 
@@ -627,7 +627,7 @@ Mapping completed. Please see the generated file in vulnerability-reports/cpes/c
 To be used only for C/C++ projects that are not supported by syft, such as those that do not make use of the CONAN package manager, may generate an SBOM using the `-generateCSbom` flag. The project name and format (only json or xml) are the two arguments it accepts. Before executing the command, please make sure that `/vulnerability-reports/cpe_data.csv` and `/vulnerability-reports/conan-files/<project_name>/conanfile.txt` exist. However, `-generateCCPPReport`, which handles `conanfile.txt` generation, has now replaced `-generateCSbom.`
 
 ```sh
-nqmvul -generateCSbom vim json 
+unibom -generateCSbom vim json 
 Trying to create SBOM for vim, this may take a while...
 SBOM completed. Please see the generated file in vulnerability-reports/sboms/vim_sbom.json
 
@@ -646,7 +646,7 @@ cat /sbom-cli/vulnerability-reports/sboms/vim_sbom.json
     "tools": [
       {
         "vendor": "nquiringminds",
-        "name": "nqmvul",
+        "name": "unibom",
         "version": "1"
       }
     ],
@@ -677,7 +677,7 @@ cat /sbom-cli/vulnerability-reports/sboms/vim_sbom.json
 The `-getGhsa` flag will return detailed information about a known GHSA vulnerability. Please ensure the GHSA vul is valid and matches the following format e.g `GHSA-j8xg-fqg3-53r7`.
 
 ```sh
-nqmvul -getGhsa GHSA-j8xg-fqg3-53r7
+unibom -getGhsa GHSA-j8xg-fqg3-53r7
 {
   schema_version: '1.4.0',
   id: 'GHSA-j8xg-fqg3-53r7',
@@ -748,7 +748,7 @@ nqmvul -getGhsa GHSA-j8xg-fqg3-53r7
 The `-extractGhsas `will return an array of GHSA codes. Before running this command please replace the gitAdvisoryDbPath path from config.json with your local advisory-database/advisories path.
 
 ```sh
-nqmvul  -extractGhsas /sbom-cli/vulnerability-reports/reports/vulnerability_report_cyber_sbom 
+unibom  -extractGhsas /sbom-cli/vulnerability-reports/reports/vulnerability_report_cyber_sbom 
 [
   'GHSA-93q8-gq69-wqmw', 'GHSA-93q8-gq69-wqmw',
   'GHSA-4gmj-3p3h-gm8h', 'GHSA-rv95-896h-c2vc',
@@ -770,18 +770,18 @@ nqmvul  -extractGhsas /sbom-cli/vulnerability-reports/reports/vulnerability_repo
 The `-classifyCwe` flag will try and classify the CWE_ID as one of the following types: `not-memory-related, other-memory-related, spatial-memory-related, temporal-memory-related`. Please ensure the CWE_ID is valid and of the following form: e.g. 354. If the CWE_ID doesn't exist in the current database it will return "not found".
 
 ```sh
-nqmvul -classifyCwe CWE-354
+unibom -classifyCwe CWE-354
 CWE_ID CWE-354 has type: not-memory-related
 ```
 
 ### getHistory
-All previous iterations of a CPE will be returned by the `-getHistory` flag, which will also attempt to identify any known CVEs and CWEs (vulnerabilities) for each version. Each CWE is also categorised as memory-related or not. Can take as an argument various types of CPEs such as: `cpe:2.3:\a:\busybox:busybox:1.33.2`, `cpe:/a:doxygen:doxygen:1.7.2`. For cpes that contain trailing ':' please place them inside quotes. e.g. : `nqmvul -getHistory "cpe:2.3:a:openssl:openssl:1.1.1:::::::"` . Output is saved to output/output.txt
+All previous iterations of a CPE will be returned by the `-getHistory` flag, which will also attempt to identify any known CVEs and CWEs (vulnerabilities) for each version. Each CWE is also categorised as memory-related or not. Can take as an argument various types of CPEs such as: `cpe:2.3:\a:\busybox:busybox:1.33.2`, `cpe:/a:doxygen:doxygen:1.7.2`. For cpes that contain trailing ':' please place them inside quotes. e.g. : `unibom -getHistory "cpe:2.3:a:openssl:openssl:1.1.1:::::::"` . Output is saved to output/output.txt
 
 
 
 
 ```sh
-nqmvul -getHistory "cpe:2.3:a:openssl:openssl:1.1.1:::::::"
+unibom -getHistory "cpe:2.3:a:openssl:openssl:1.1.1:::::::"
 cpe:2.3:a:openssl:openssl:1.1.1:::::::
 Trying to find related cpes for cpe:2.3:a:openssl:openssl:1.1.1:::::::, this may take a while...
 - Processing.../
@@ -815,10 +815,10 @@ cpe:/a:openssl:openssl:0.9.3                   - CVE-2005-2946  - CWE-327       
 ```
 ### generateDockerSbom
 
-The nqmvul `-generateDockerSbom` command employs [Syft](https://github.com/anchore/syft) to first generate an SBOM (Software Bill of Materials) for the specified Docker image (`<image_name>`). Following the SBOM creation, it uses [Grype](https://github.com/anchore/grype) to analyse the identified components for vulnerabilities, producing a comprehensive vulnerability report. e.g.`-generateDockerSbom nginx:latest nginx`
+The unibom `-generateDockerSbom` command employs [Syft](https://github.com/anchore/syft) to first generate an SBOM (Software Bill of Materials) for the specified Docker image (`<image_name>`). Following the SBOM creation, it uses [Grype](https://github.com/anchore/grype) to analyse the identified components for vulnerabilities, producing a comprehensive vulnerability report. e.g.`-generateDockerSbom nginx:latest nginx`
 
 ```sh
-nqmvul -generateDockerSbom nginx:latest nginx
+unibom -generateDockerSbom nginx:latest nginx
 Running syft to generate SBOM for Docker image: nginx:latest...
 SBOM generation completed for Docker image. SBOM saved to /vulnerability-reports/sboms/nginx.json
 Running grype to generate vulnerability report...
@@ -989,10 +989,10 @@ Vulnerability report saved to: /vulnerability-reports/reports/vulnerability_repo
 ```
 ### binwalk
 
-* The `nqmvul -binwalk` command requires specific arguments to function correctly. Here is the general syntax to follow:
+* The `unibom -binwalk` command requires specific arguments to function correctly. Here is the general syntax to follow:
 
 ```sh
-nqmvul -binwalk <directory_path> "[-binwalk_flags]" <file_name>
+unibom -binwalk <directory_path> "[-binwalk_flags]" <file_name>
 ```
 * For more detailed documentation and advanced usage examples, please visit the [Binwalk GitHub repository](https://github.com/ReFirmLabs/binwalk).
 
@@ -1006,10 +1006,10 @@ nqmvul -binwalk <directory_path> "[-binwalk_flags]" <file_name>
 
 Here’s how you can use the command on a `Linux` system where you want to apply the `-Me` flag (for recursive extraction) to a specific firmware file:
 ```sh
-nqmvul -binwalk "$(pwd)" "[-Me]" openwrt-23.05.3-mediatek-filogic-acer_predator-w6-initramfs-kernel.bin
+unibom -binwalk "$(pwd)" "[-Me]" openwrt-23.05.3-mediatek-filogic-acer_predator-w6-initramfs-kernel.bin
 
 ```
-This command tells `nqmvul` to run Binwalk in the current directory `"$(pwd)"`, use the `-Me` flag for recursive extraction, and process the specified .bin file.
+This command tells `unibom` to run Binwalk in the current directory `"$(pwd)"`, use the `-Me` flag for recursive extraction, and process the specified .bin file.
 
 Logs will be saved to /binwalk-reports/openwrt-23.05.3-mediatek-filogic-acer_predator-w6-initramfs-kernel.bin_extraction_report
 
@@ -1060,10 +1060,10 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 If you want to use multiple flags with Binwalk, such as `-M` for matryoshka (recursive) scanning and `-e` for extraction, you would format your command as follows:
 
 ```sh
-nqmvul -binwalk /path/to/current/directory "[-M -e]" your_firmware_file.bin
+unibom -binwalk /path/to/current/directory "[-M -e]" your_firmware_file.bin
 ```
 
-This setup directs `nqmvul` to execute Binwalk with both the `-M` and `-e` flags on `your_firmware_file.bin` located at the specified path.
+This setup directs `unibom` to execute Binwalk with both the `-M` and `-e` flags on `your_firmware_file.bin` located at the specified path.
 
 #### Binwalk Important Notes
 
@@ -1078,14 +1078,14 @@ The `-compare` command compares components, versions, and vulnerabilities across
 
 #### Compare Usage
 ```sh
-nqmvul -compare <absolute/path/to/sbom1> <absolute/path/to/sbom2> <additional SBOM paths...>
+unibom -compare <absolute/path/to/sbom1> <absolute/path/to/sbom2> <additional SBOM paths...>
 ```
 The output will be saved by default to `vulnerability-reports/comparisons/comparison-result.txt`
 
 If you want to specify a different file name to be saved, please use the following format:
 
 ```sh
-nqmvul -compare "[<absolute/path/to/sbom-1.json> <absolute/path/to/sbom-2.json> <additional SBOM paths...>]" filename
+unibom -compare "[<absolute/path/to/sbom-1.json> <absolute/path/to/sbom-2.json> <additional SBOM paths...>]" filename
 ```
 #### Compare Output:
 The output is structured in three sections:
@@ -1097,7 +1097,7 @@ The output is structured in three sections:
 Example output 
 
 ```sh
-nqmvul -compare "[/test/test-files/kernel-sbom-1.json test/test-files/kernel-sbom-2.json /test/test-files/kernel-sbom-3.json]" test-comp
+unibom -compare "[/test/test-files/kernel-sbom-1.json test/test-files/kernel-sbom-2.json /test/test-files/kernel-sbom-3.json]" test-comp
 
 ------------------ SBOM Comparison Results ------------------
 

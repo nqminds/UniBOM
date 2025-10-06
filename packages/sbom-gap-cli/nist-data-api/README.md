@@ -4,6 +4,29 @@ The NIST Data API provides endpoints to retrieve information about CVEs (Common 
 ---
 
 
+## ⚠️ Important Notice: NIST Data Format Change
+
+> **Note (October 2025):**  
+> The original pipeline for fetching and processing **CVE/CPE data** no longer works because the **NVD (NIST Vulnerability Database)** has permanently **retired its XML and legacy JSON 1.0 feeds** and migrated to the **JSON 2.0 REST API**.  
+>  
+> As a result, any steps in this repository that rely on downloading data from URLs such as  
+> `https://nvd.nist.gov/feeds/json/...` or `https://nvd.nist.gov/feeds/xml/...`  
+> will now fail or return **HTTP 403 Forbidden**.  
+>  
+> ✅ **Workaround:**  
+> - Use the **CLI tool** to generate SBOMs.  
+> - To explore CPE/CVE information or perform historical analysis, upload your SBOM to the following web app:  
+>   🔗 [https://sbom.coreid.com/sbom-analysis](https://sbom.coreid.com/sbom-analysis)  
+> - **Currently affected commands:**  
+>   - `listCpeDetails`  
+>   - `getCves`  
+>   - `getCveInfo`  
+>   - `getHistory`
+>   - `compare`    
+>  
+> A future update will migrate this pipeline to use the new **NVD JSON 2.0 data format**.
+
+
 ## Features
 
 * Fetch CVEs for a given CPE.

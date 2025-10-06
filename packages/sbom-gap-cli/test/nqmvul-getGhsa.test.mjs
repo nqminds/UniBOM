@@ -3,10 +3,10 @@ import { promisify } from 'util';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -getGhsa command', () => {
+describe('unibom -getGhsa command', () => {
   test('displays getGhsa information', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync('nqmvul -getGhsa GHSA-j8xg-fqg3-53r7');
+    const { stdout, stderr } = await execAsync('unibom -getGhsa GHSA-j8xg-fqg3-53r7');
 
     expect(stderr).toBeFalsy();
     expect(stdout).toContain('schema_version');

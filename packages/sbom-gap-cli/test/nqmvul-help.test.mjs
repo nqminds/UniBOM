@@ -1,9 +1,9 @@
 import { exec } from 'child_process';
 import { describe, test, expect } from '@jest/globals';
 
-describe('nqmvul -help command', () => {
+describe('unibom -help command', () => {
   test('should display the help text', (done) => {
-    exec('nqmvul -help', (error, stdout, stderr) => {
+    exec('unibom -help', (error, stdout, stderr) => {
       expect(error).toBeNull();
       expect(stderr).toBe('');
       expect(stdout).toContain('Usage:');

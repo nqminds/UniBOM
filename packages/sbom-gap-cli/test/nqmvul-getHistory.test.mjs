@@ -6,7 +6,7 @@ import { expect } from '@jest/globals';
 
 const execAsync = promisify(exec);
 
-describe('nqmvul -getHistory command', () => {
+describe('unibom -getHistory command', () => {
   const projectRoot = process.cwd();
   const outputFilePath = path.join(
     projectRoot,
@@ -26,7 +26,7 @@ describe('nqmvul -getHistory command', () => {
 
   test('Provides a complete historical analyses of a CPE', async () => {
     // eslint-disable-next-line prettier/prettier
-    const { stdout, stderr } = await execAsync('nqmvul -getHistory cpe:2.3:a:sec_project:sec:-');
+    const { stdout, stderr } = await execAsync('unibom -getHistory cpe:2.3:a:sec_project:sec:-');
     expect(stderr).toBeFalsy();
     expect(stdout).toContain(
       'Trying to find related cpes for cpe:2.3:a:sec_project:sec:-, this may take a while...',

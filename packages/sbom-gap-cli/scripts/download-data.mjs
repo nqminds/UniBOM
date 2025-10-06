@@ -331,8 +331,9 @@ async function main() {
     mkdirSync(reportsDir, { recursive: true });
 
     const cpeUrl =
-      'https://nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml.gz';
-    const cweUrl = 'https://cwe.mitre.org/data/xml/cwec_v4.13.xml.zip';
+      'https://drive.google.com/uc?export=download&id=1LE9MBZARgv1p-7rLUQCXgeHdiKMli7uB';
+    const cweUrl =
+      'https://drive.google.com/uc?export=download&id=1ZHwkip0kua1WBlQsEqMo9Nq4ytBPjlWs';
 
     // Downloading latest CPE data
     const cpeFilePath = await downloadData(
