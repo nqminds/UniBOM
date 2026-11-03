@@ -43,6 +43,14 @@ DB_HOST='localhost'
 DB_NAME='cve_database'
 DB_PASSWORD='password'
 DB_PORT=5432
+# Optional, defaults to 60000
+DB_STATEMENT_TIMEOUT_MS=60000
+```
+
+Apply the database migrations in [migrations/](migrations/). `001_cve_cpe_id_pattern_index.sql` adds the index that CPE lookups need; without it every request scans the whole `cve` table:
+
+```bash
+psql -h localhost -U postgres -d cve_database -f migrations/001_cve_cpe_id_pattern_index.sql
 ```
 
 Start the server:
