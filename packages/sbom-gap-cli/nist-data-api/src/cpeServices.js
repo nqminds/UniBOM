@@ -7,7 +7,14 @@ const { Pool } = require('pg');
 
 dotenv.config();
 
-const { DB_USER, DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT } = process.env;
+const {
+  DB_USER,
+  DB_HOST,
+  DB_NAME,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_STATEMENT_TIMEOUT_MS,
+} = process.env;
 // PostgreSQL database connection details
 const pool = new Pool({
   user: DB_USER,
@@ -15,7 +22,19 @@ const pool = new Pool({
   database: DB_NAME,
   password: DB_PASSWORD,
   port: DB_PORT,
+  // Stop a runaway query (e.g. a missing index) from running for minutes
+  statement_timeout: Number(DB_STATEMENT_TIMEOUT_MS) || 60000,
 });
+
+/**
+ * Escape LIKE wildcards so CPE characters such as "_" are matched literally.
+ *
+ * @param {string} value - The raw CPE string.
+ * @returns {string} The escaped string, safe to use as a LIKE prefix.
+ */
+function escapeLike(value) {
+  return value.replace(/[\\%_]/g, '\\$&');
+}
 
 /**
  * Query CVE data by CPE.
@@ -29,7 +48,7 @@ async function getCVEsByCPE(cpe) {
       FROM cve
       WHERE cpe_id LIKE $1
     `;
-    const values = [`${cpe}%`];
+    const values = [`${escapeLike(cpe)}%`];
 
     // Execute the query
     const { rows } = await pool.query(query, values);
@@ -72,7 +91,7 @@ async function getCPEVersions(cpe) {
       FROM cve
       WHERE cpe_id LIKE $1
     `;
-    const values = [`${baseCPE}%`];
+    const values = [`${escapeLike(baseCPE)}%`];
 
     // Execute the query
     const { rows } = await pool.query(query, values);

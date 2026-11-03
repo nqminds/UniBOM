@@ -107,6 +107,13 @@ def build_database():
         FOREIGN KEY (cpe_id) REFERENCES cpe (cpe_id)
     )
     """)
+
+    # The API filters with `cpe_id LIKE 'prefix%'`; the primary key cannot serve
+    # that under a non-C collation, so add a pattern index
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS cve_cpe_id_pattern_idx
+        ON cve (cpe_id text_pattern_ops)
+    """)
     conn.commit()
 
     def process_json(file_path):
